@@ -1,20 +1,30 @@
 version: '3.8'
-
 services:
   perfil-server:
-    build:
-      context: ./perfil-server
-      dockerfile: Dockerfile
+    build: .
     container_name: perfil-server
-    env_file:
-      - ./perfil-server/.env
     ports:
       - "3000:3000"
+    environment:
+      DATABASE_HOST: pgsql
+      DATABASE_PORT: 5432
+      DATABASE_USER: postgres
+      DATABASE_PASSWORD: postgres
+      DATABASE_NAME: perfildb
     depends_on:
       - pgsql
-      - redis
-      - rabbitmq
-    networks:
-      - sail
+
+  pgsql:
+    image: postgres:17-alpine
+    container_name: pgsql
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: perfildb
+    ports:
+      - "5432:5432"
     volumes:
-      - ./perfil-server:/usr/src/app
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:

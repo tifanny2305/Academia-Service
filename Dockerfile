@@ -1,17 +1,15 @@
-# Etapa 1: Construcción
+# Etapa 1: build
 FROM node:20-alpine AS builder
 
 WORKDIR /usr/src/app
 
-# Instalar dependencias
 COPY package*.json ./
 RUN yarn install --frozen-lockfile
 
-# Copiar el resto del proyecto y construir
 COPY . .
 RUN yarn build
 
-# Etapa 2: Imagen de producción
+# Etapa 2: producción
 FROM node:20-alpine
 
 WORKDIR /usr/src/app

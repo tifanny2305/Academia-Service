@@ -1,15 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, ManyToOne, JoinColumn, Column } from 'typeorm';
 import { PlanEstudio } from '../../plan-estudio/entities/plan-estudio.entity';
-
-// Placeholder para Materia
-@Entity('materias')
-export class Materia {
-  @PrimaryGeneratedColumn()
-  id: number;
-
-  @Column()
-  nombre: string;
-}
+import { Materia } from './materia.entity';
 
 @Entity('materia_planes')
 export class MateriaPlan {
