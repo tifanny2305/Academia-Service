@@ -2,7 +2,7 @@ version: '3.8'
 services:
   perfil-server:
     build: .
-    container_name: perfil-server
+    container_name: academia-server
     ports:
       - "3000:3000"
     environment:
